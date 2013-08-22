@@ -1,67 +1,96 @@
 <?php
 
+/*
+ * (c) Tobias Bollinger <tobias.bollinger@gmail.com>
+ *
+ */
+
+namespace Calendar;
+
+/**
+ * Calendar Controller
+ */
 class CalendarController
 {
 	private $CalendarService;
 	private $CalendarList;
-
+	private $Loader;
+	/**
+	 * __construct
+	 */
 	public function __construct()
 	{
 		$this->CalendarService = new CalendarService();
-		$this->CalendarList = $this->CalendarService->getCalendarListDao();
+		$this->Loader = new Loader();
+		$this->Loader->setTemplate('template/header.php', 'template/footer.php');
 	}
 
+	/**
+	 * index Controller
+	 */
 	public function index()
 	{
 		$this->setTestData();
 
-		$CalendarDao = $this->CalendarService->getCalendarDao(0);
+		$data['Calendar1'] = $this->CalendarService->getCalendar(0);
+		$data['Calendar2'] = $this->CalendarService->getCalendar(1);
 
-		$Event1 = $CalendarDao->getEvent(0);
-		foreach ($Event1 as $key => $value) {
-			echo $key;
-			echo $value;
-			echo "<br>";
-		}
-
-		$Event2 = $CalendarDao->getEvent(1);
-		foreach ($Event2 as $key => $value) {
-			echo $key;
-			echo $value;
-			echo "<br>";
-		}
-
-		$CalendarDao2 = $this->CalendarService->getCalendarDao(1);
-
-		$Event3 = $CalendarDao2->getEvent(0);
-		foreach ($Event3 as $key2 => $value2) {
-			echo $key2;
-			echo $value2;
-			echo "<br>";
-		}
-		
+		$this->Loader->loadView('listEvents', $data);
 	}
 
+	/**
+	 * add a Event
+	 * @param integer $calendarId
+	 * @param array $event name, startTime, endTime, startDate, endDate
+	 */
 	public function addEvent($calendarId, $event)
 	{
-		$this->CalendarList->getCalendar($calendarId)->addEvent($event);
+		$this->CalendarService->getCalendar($calendarId)->addEvent($event);
 	}
 
+	/**
+	 * delet a Evebt
+	 * @param  integer $calendarId
+	 * @param  interger $eventId
+	 */
 	public function deletEvent($calendarId, $eventId)
 	{
-		$this->CalendarList->getCalendar($calendarId)->deletEvent($eventId);
+		$this->CalendarService->getCalendar($calendarId)->deletEvent($eventId);
 	}
 
+	/**
+	 * add a new Calendar
+	 * @param string $name
+	 */
 	public function addCalendar($name)
 	{
-		$this->CalendarList->addCalendar($name);
+		$this->CalendarService->addCalendar($name);
 	}
 
+	/**
+	 * delet a Calendar
+	 * @param  integer $id
+	 */
 	public function deletCalendar($id)
 	{		
-		$this->CalendarList->deletCalendar($id);
+		$this->CalendarService->deletCalendar($id);
 	}
 
+	/**
+	 * [say description]
+	 * @param  string $value [description]
+	 * @return [type]        [description]
+	 */
+	public function say($value='')
+	{
+		$data = array('name' => $value);
+		$this->Loader->setSideTitle('Test Side');
+		$this->Loader->loadView('test', $data);
+	}
+
+	/**
+	 * Set Test Data
+	 */
 	private function setTestData()
 	{
 		$this->addCalendar('Arbeit');
@@ -69,21 +98,26 @@ class CalendarController
 		$event1 = array(
 			'Aufstehen',
 			'8.00',
+			'8.00',
 			'21.08.2013',
+			'22.08.2013',
 		);
 		$event2 = array(
 			'Schlafen',
 			'23.00',
+			'8.00',
+			'21.08.2013',
 			'21.08.2013',
 		);
 		$event3 = array(
 			'Gehen',
 			'11.00',
+			'12.00',
+			'21.08.2013',
 			'21.08.2013',
 		);
 		$this->addEvent(0, $event1);
 		$this->addEvent(0, $event2);
 		$this->addEvent(1, $event3);
 	}
-
 }

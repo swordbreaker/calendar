@@ -1,26 +1,52 @@
 <?php
 
+/*
+ * (c) Tobias Bollinger <tobias.bollinger@gmail.com>
+ *
+ */
+
+namespace Calendar;
+
 /**
-* 
-*/
+ * Calendar Service Class
+ * Get all Calendar Data
+ */
 class CalendarService
 {
-	private $CalendarDao;
 	private $CalendarListDao;
 
+	/**
+	 * __construct
+	 */
 	public function __construct()
 	{
-		$this->CalendarDao = array();
 		$this->CalendarListDao = new CalendarListDao();
 	}
 
-	public function getCalendarDao($id)
+	/**
+	 * get a Calendar
+	 * @param integer $id
+	 */
+	public function getCalendar($id)
 	{
 		return $this->CalendarListDao->getCalendar($id);
 	}
 
-	public function getCalendarListDao()
+	/**
+	 * Creat a new Calendar
+	 * @param string $name Calendar Name
+	 */
+	public function addCalendar($name)
 	{
-		return $this->CalendarListDao;
+		$this->CalendarListDao->addCalendar($name);	
+	}
+
+	/**
+	 * Delet a Calendar
+	 * @param  interger $id
+	 */
+	public function deletCalendar($id)
+	{
+		$this->CalendarListDao->deletCalendar($id);
 	}
 }

@@ -1,15 +1,37 @@
 <?php
 
+/*
+ * (c) Tobias Bollinger <tobias.bollinger@gmail.com>
+ *
+ */
+
+namespace Calendar;
+
+/**
+ * EventModel Class
+ */
 class EventModel
 {
 	public $name;
-	public $time;
-	public $date;
+	public $startTime;
+	public $endTime;
+	public $startDate;
+	public $endDate;
 
-	public function __construct($name, $time, $date)
+	/**
+	* __construct
+	* @param string name
+	* @param date startTime date('H:i:s') 
+	* @param date endTime date('H:i:s')
+	* @param date startDate date('d, m, Y')
+	* @param date endDate date('d, m, Y')
+	*/	
+	public function __construct($name, $startTime, $endTime, $startDate, $endDate)
 	{
 		$this->name = $name;
-		$this->time = $time;
-		$this->date = $date;
+		$this->startTime = $startTime;
+		$this->endTime = $endTime;
+		$this->startDate = $startDate;
+		$this->endDate = $endDate;
 	}
 }
