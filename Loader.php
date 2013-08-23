@@ -68,8 +68,8 @@ class Loader
 		}
 
 		$controllerName = 'Calendar\\' . $class . "Controller";
-		$Controller = new $controllerName();
-		call_user_func_array(array($Controller, $function), $param);
+		$controller = new $controllerName();
+		call_user_func_array(array($controller, $function), $param);
 	}
 
 	/**

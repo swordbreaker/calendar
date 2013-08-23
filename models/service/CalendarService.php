@@ -13,14 +13,14 @@ namespace Calendar;
  */
 class CalendarService
 {
-	private $CalendarDao;
+	private $calendarDao;
 
 	/**
 	 * __construct
 	 */
 	public function __construct()
 	{
-		$this->CalendarDao = new CalendarDao();
+		$this->calendarDao = new CalendarDao();
 	}
 
 	/**
@@ -30,7 +30,7 @@ class CalendarService
 	 */
 	public function getEvent($calendarId, $eventId)
 	{
-		return $this->CalendarDao->getEvent($calendarId, $eventId);
+		return $this->calendarDao->getEvent($calendarId, $eventId);
 	}
 
 	/**
@@ -39,7 +39,7 @@ class CalendarService
 	 */
 	public function addEvent($calendarId, $eventArray)
 	{
-		$this->CalendarDao->addEvent($calendarId, $eventArray);
+		$this->calendarDao->addEvent($calendarId, $eventArray);
 	}
 
 	/**
@@ -48,12 +48,12 @@ class CalendarService
 	 */
 	public function deleteEvent($calendarId, $eventId)
 	{
-		$this->CalendarDao->deleteEvent($calendarId, $eventId);
+		$this->calendarDao->deleteEvent($calendarId, $eventId);
 	}
 
 	public function updateEvent($calendarId, $eventId, $eventArray)
 	{
-		$this->CalendarDao->updateEvent($calendarId, $eventId, $eventArray);
+		$this->calendarDao->updateEvent($calendarId, $eventId, $eventArray);
 	}
 
 	/**
@@ -62,7 +62,7 @@ class CalendarService
 	 */
 	public function getCalendarList()
 	{
-		return $this->CalendarDao->getCalendarList();
+		return $this->calendarDao->getCalendarList();
 	}
 
 	/**
@@ -71,7 +71,7 @@ class CalendarService
 	 */
 	public function getCalendar($id)
 	{
-		return $this->CalendarDao->getCalendar($id);
+		return $this->calendarDao->getCalendar($id);
 	}
 
 	/**
@@ -80,7 +80,7 @@ class CalendarService
 	 */
 	public function addCalendar($name)
 	{
-		$this->CalendarDao->addCalendar($name);	
+		$this->calendarDao->addCalendar($name);	
 	}
 
 	/**
@@ -89,11 +89,11 @@ class CalendarService
 	 */
 	public function deleteCalendar($id)
 	{
-		$this->CalendarDao->deleteCalendar($id);
+		$this->calendarDao->deleteCalendar($id);
 	}
 
 	public function updateCalendar($id, $name)
 	{
-		$this->CalendarDao->updateCalendar($id, $name);
+		$this->calendarDao->updateCalendar($id, $name);
 	}
 }

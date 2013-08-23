@@ -12,16 +12,16 @@ namespace Calendar;
  */
 class CalendarController
 {
-	private $CalendarService;
-	private $Loader;
+	private $calendarService;
+	private $loader;
 	/**
 	 * __construct
 	 */
 	public function __construct()
 	{
-		$this->CalendarService = new CalendarService();
-		$this->Loader = new Loader();
-		$this->Loader->setTemplate('template/header.php', 'template/footer.php');
+		$this->calendarService = new CalendarService();
+		$this->loader = new Loader();
+		$this->loader->setTemplate('template/header.php', 'template/footer.php');
 	}
 
 	/**
@@ -34,10 +34,10 @@ class CalendarController
 
 	public function listCalendars()
 	{
-		$CalendarList = $this->CalendarService->getCalendarList();
+		$CalendarList = $this->calendarService->getCalendarList();
 
-		$data['CalendarList'] = $CalendarList;
-		$this->Loader->loadView('listCalendar', $data);
+		$data['calendarList'] = $CalendarList;
+		$this->loader->loadView('listCalendar', $data);
 	}
 
 	/**
@@ -46,9 +46,9 @@ class CalendarController
 	 */
 	public function showCalendar($id)
 	{
-		$data['Calendar'] = $this->CalendarService->getCalendar($id);
+		$data['calendar'] = $this->calendarService->getCalendar($id);
 		$data['calendarId'] = $id;
-		$this->Loader->loadView('showCalendar', $data);
+		$this->loader->loadView('showCalendar', $data);
 	}
 
 	/**
@@ -58,10 +58,10 @@ class CalendarController
 	 */
 	public function showEvent($calendarId, $eventId)
 	{
-		$data['Event'] = $this->CalendarService->getEvent($calendarId, $eventId);
+		$data['event'] = $this->calendarService->getEvent($calendarId, $eventId);
 		$data['calendarId'] = $calendarId;
 		$data['eventId'] = $eventId;
-		$this->Loader->loadView('showEvent', $data);
+		$this->loader->loadView('showEvent', $data);
 	}
 
 	/**
@@ -71,7 +71,7 @@ class CalendarController
 	 */
 	public function addEvent($calendarId, $event)
 	{
-		$this->CalendarService->addEvent($calendarId, $event);
+		$this->calendarService->addEvent($calendarId, $event);
 	}
 
 	/**
@@ -81,7 +81,7 @@ class CalendarController
 	 */
 	public function deleteEvent($calendarId, $eventId)
 	{
-		$this->CalendarService->deleteEvent($calendarId, $eventId);
+		$this->calendarService->deleteEvent($calendarId, $eventId);
 	}
 
 	/**
@@ -99,7 +99,7 @@ class CalendarController
 			'endDate' => $_GET['endDate'],
 			);
 
-		$this->CalendarService->updateEvent($calendarId, $eventId, $eventArray);
+		$this->calendarService->updateEvent($calendarId, $eventId, $eventArray);
 		//URL for testing http://localhost/calendar/calendar/updateEvent/0/0/?name=neuerName&startTime=10.00&endTime=11.00&startDate=23.08.2013&endDate=23.08.2013
 
 		//for testing
@@ -112,7 +112,7 @@ class CalendarController
 	 */
 	public function addCalendar($name)
 	{
-		$this->CalendarService->addCalendar($name);
+		$this->calendarService->addCalendar($name);
 	}
 
 	/**
@@ -121,12 +121,17 @@ class CalendarController
 	 */
 	public function deleteCalendar($id)
 	{
-		$this->CalendarService->deleteCalendar($id);
+		$this->calendarService->deleteCalendar($id);
 	}
 
+	/**
+	 * update a Calendar
+	 * @param  integer $calendarId
+	 * @param  string $name
+	 */
 	public function updateCalendar($calendarId, $name)
 	{
-		$this->CalendarService->updateCalendar($calendarId, $name);
+		$this->calendarService->updateCalendar($calendarId, $name);
 
 		//for testing
 		$this->showCalendar($calendarId);

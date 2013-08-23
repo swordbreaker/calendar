@@ -1,16 +1,16 @@
 <?php
-$Event = $data['Event'];
+$event = $data['event'];
 $calendarId = $data['calendarId'];
 $eventId = $data['eventId'];
 
-echo $Event->name;
+echo $event->name;
 echo "<br>";
-echo $Event->startTime;
+echo $event->startTime;
 echo " - ";
-echo $Event->endTime;
+echo $event->endTime;
 echo "<br>";
-echo $Event->startDate;
+echo $event->startDate;
 echo " - ";
-echo $Event->endDate;
+echo $event->endDate;
 echo "<br>";
 echo '<a href="'. BASE_URL .'/calendar/deleteEvent/'. $calendarId .'/'. $eventId .'">delete</a>';

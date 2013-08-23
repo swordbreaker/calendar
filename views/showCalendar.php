@@ -1,20 +1,20 @@
 <?php
-$Calendar = $data['Calendar'];
+$calendar = $data['calendar'];
 $calendarId = $data['calendarId'];
 
-$EventList = $Calendar->events;
+$eventList = $calendar->events;
 
-echo '<h1>'. $Calendar->name .'</h1>';
+echo '<h2>'. $calendar->name .'</h2>';
 
-foreach ($EventList as $eventId => $Event) {
-	echo '<a href="'. BASE_URL .'/calendar/showEvent/'. $calendarId .'/'. $eventId .'">'. $Event->name .'</a>';
+foreach ($eventList as $eventId => $event) {
+	echo '<a href="'. BASE_URL .'/calendar/showEvent/'. $calendarId .'/'. $eventId .'">'. $event->name .'</a>';
 	echo '<br>';
-	echo $Event->startTime;
+	echo $event->startTime;
 	echo " - ";
-	echo $Event->endTime;
+	echo $event->endTime;
 	echo "<br>";
-	echo $Event->startDate;
+	echo $event->startDate;
 	echo " - ";
-	echo $Event->endDate;
+	echo $event->endDate;
 	echo "<br>";
 }

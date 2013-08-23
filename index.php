@@ -1,6 +1,9 @@
 <?php
 
-namespace Calendar;
+/*
+ * (c) Tobias Bollinger <tobias.bollinger@gmail.com>
+ *
+ */
 
 require_once 'AutoloadsRegister.php';
 
@@ -8,11 +11,11 @@ require_once 'AutoloadsRegister.php';
 define('BASE_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/calendar');
 
 //Autolad Classes
-$AutoloadsRegister = new AutoloadsRegister();
+$autoloadsRegister = new Calendar\AutoloadsRegister();
 spl_autoload_register('Calendar\AutoloadsRegister::register');
 
 //Exploit the URI path
 $requestURI = explode('/', $_SERVER['REQUEST_URI']);
-$Loader = new Loader();
+$loader = new Calendar\Loader();
 //Load the Controller
-$Loader->loadController($requestURI);
+$loader->loadController($requestURI);

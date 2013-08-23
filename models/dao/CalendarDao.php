@@ -13,7 +13,7 @@ namespace Calendar;
  */
 class CalendarDao
 {
-	private $Calendars;
+	private $calendars;
 
 	/**
 	 * __construct
@@ -21,9 +21,9 @@ class CalendarDao
 	 */
 	public function __construct()
 	{
-		$this->Calendars = array();
+		$this->calendars = array();
 		require_once 'models/dao/testData.php';
-		$this->Calendars = $TestCalendars;
+		$this->calendars = $testCalendars;
 	}
 
 	/**
@@ -33,7 +33,7 @@ class CalendarDao
 	 */
 	public function getEvent($calendarId, $eventId)
 	{
-		return $this->Calendars[$calendarId]->events[$eventId];
+		return $this->calendars[$calendarId]->events[$eventId];
 	}
 
 	/**
@@ -43,7 +43,7 @@ class CalendarDao
 	public function addEvent($calendarId, $eventArray)
 	{
 		$Event = new EventModel($eventArray[0], $eventArray[1], $eventArray[2], $eventArray[3], $eventArray[4]);
-		$this->Calendars[$calendarId]->addEvent($Event);
+		$this->calendars[$calendarId]->addEvent($Event);
 	}
 
 	/**
@@ -52,7 +52,7 @@ class CalendarDao
 	 */
 	public function deleteEvent($calendarId, $eventId)
 	{
-		$this->Calendars[$calendarId]->removeEvent($eventId);
+		$this->calendars[$calendarId]->removeEvent($eventId);
 	}
 
 	/**
@@ -63,11 +63,11 @@ class CalendarDao
 	 */
 	public function updateEvent($calendarId, $eventId, $eventArray)
 	{
-		$this->Calendars[$calendarId]->events[$eventId]->name = $eventArray['name'];
-		$this->Calendars[$calendarId]->events[$eventId]->startTime = $eventArray['startTime'];
-		$this->Calendars[$calendarId]->events[$eventId]->endTime = $eventArray['endTime'];
-		$this->Calendars[$calendarId]->events[$eventId]->startDate = $eventArray['startDate'];
-		$this->Calendars[$calendarId]->events[$eventId]->endDate = $eventArray['endDate'];
+		$this->calendars[$calendarId]->events[$eventId]->name = $eventArray['name'];
+		$this->calendars[$calendarId]->events[$eventId]->startTime = $eventArray['startTime'];
+		$this->calendars[$calendarId]->events[$eventId]->endTime = $eventArray['endTime'];
+		$this->calendars[$calendarId]->events[$eventId]->startDate = $eventArray['startDate'];
+		$this->calendars[$calendarId]->events[$eventId]->endDate = $eventArray['endDate'];
 	}
 
 	/**
@@ -76,7 +76,7 @@ class CalendarDao
 	 */
 	public function getCalendarList()
 	{
-		return $this->Calendars;
+		return $this->calendars;
 	}
 
 	/**
@@ -86,7 +86,7 @@ class CalendarDao
 	 */
 	public function getCalendar($id)
 	{
-		return $this->Calendars[$id];
+		return $this->calendars[$id];
 	}
 
 	/**
@@ -95,7 +95,7 @@ class CalendarDao
 	 */
 	public function addCalendar($name)
 	{
-		array_push($this->Calendars, new CalendarModel($name));
+		array_push($this->calendars, new CalendarModel($name));
 	}
 
 	/**
@@ -104,7 +104,7 @@ class CalendarDao
 	 */
 	public function deleteCalendar($id)
 	{
-		unset($this->Calendars[$id]);
+		unset($this->calendars[$id]);
 	}
 
 	/**
@@ -114,6 +114,6 @@ class CalendarDao
 	 */
 	public function updateCalendar($id, $name)
 	{
-		$this->Calendars[$id]->name = $name;
+		$this->calendars[$id]->name = $name;
 	}
 }
