@@ -12,7 +12,8 @@ namespace Calendar;
  */
 class CalendarModel
 {
-	private $name;
+	public $name;
+	public $events;
 
 	/**
 	 * __construct
@@ -21,14 +22,16 @@ class CalendarModel
 	public function __construct($name)
 	{
 		$this->name = $name;
+		$this->events = array();
 	}
 
-	/**
-	 * get Calendar Name
-	 * @return string Calendar name
-	 */
-	public function getName()
+	public function addEvent($event)
 	{
-		return $this->name;
+		array_push($this->events, $event);
+	}
+
+	public function removeEvent($id)
+	{
+		unset($this->events[$id]);
 	}
 }

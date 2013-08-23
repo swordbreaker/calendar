@@ -13,14 +13,56 @@ namespace Calendar;
  */
 class CalendarService
 {
-	private $CalendarListDao;
+	private $CalendarDao;
 
 	/**
 	 * __construct
 	 */
 	public function __construct()
 	{
-		$this->CalendarListDao = new CalendarListDao();
+		$this->CalendarDao = new CalendarDao();
+	}
+
+	/**
+	 * get the Event Class
+	 * @param  integer $id
+	 * @return Object Event Class
+	 */
+	public function getEvent($calendarId, $eventId)
+	{
+		return $this->CalendarDao->getEvent($calendarId, $eventId);
+	}
+
+	/**
+	 * Add a new Event
+	 * @param array $event name, startTime, endTime, startDate, endDate
+	 */
+	public function addEvent($calendarId, $eventArray)
+	{
+		$this->CalendarDao->addEvent($calendarId, $eventArray);
+	}
+
+	/**
+	 * delete a Event
+	 * @param  integer $id
+	 */
+	public function deleteEvent($calendarId, $eventId)
+	{
+		$this->CalendarDao->deleteEvent($calendarId, $eventId);
+	}
+
+	public function updateEvent($calendarId, $eventId, $eventArray)
+	{
+		$this->CalendarDao->updateEvent($calendarId, $eventId, $eventArray);
+	}
+
+	/**
+	 * get a list of all Calendar
+	 * @return arrayObject 
+	 */
+	public function getCalendarList()
+	{
+		return $this->CalendarDao->getCalendarList();
 	}
 
 	/**
@@ -29,7 +71,7 @@ class CalendarService
 	 */
 	public function getCalendar($id)
 	{
-		return $this->CalendarListDao->getCalendar($id);
+		return $this->CalendarDao->getCalendar($id);
 	}
 
 	/**
@@ -38,15 +80,20 @@ class CalendarService
 	 */
 	public function addCalendar($name)
 	{
-		$this->CalendarListDao->addCalendar($name);	
+		$this->CalendarDao->addCalendar($name);	
 	}
 
 	/**
-	 * Delet a Calendar
+	 * Delete a Calendar
 	 * @param  interger $id
 	 */
-	public function deletCalendar($id)
+	public function deleteCalendar($id)
 	{
-		$this->CalendarListDao->deletCalendar($id);
+		$this->CalendarDao->deleteCalendar($id);
+	}
+
+	public function updateCalendar($id, $name)
+	{
+		$this->CalendarDao->updateCalendar($id, $name);
 	}
 }

@@ -45,34 +45,31 @@ class Loader
 	 */
 	public function loadController($requestURI)
 	{
-		if (isset($requestURI[2]) && $requestURI[2] != '' && $requestURI[2] != 'index.php')
-		{ 
+		$param = array();
+
+		if (isset($requestURI[2]) && $requestURI[2] != '' && $requestURI[2] != 'index.php') { 
 			$class = $requestURI[2];
-		}
-		else 
-		{
+		} else {
 			$class = self::INDEX_CONTROLLER;
 		}
-		if (isset($requestURI[3]) && $requestURI[2] != '')
-		{
+		if (isset($requestURI[3]) && $requestURI[3] != '') {
 			$function = $requestURI[3];
-		}
-		else 
-		{
+		} else {
 			$function = 'index';
 		}
-		if (isset($requestURI[4]) && $requestURI[2] != '')
-		{
-			$param = $requestURI[4];
+		if (isset($requestURI[4]) && $requestURI[4] != '') {
+			foreach ($requestURI as $key => $uri) {
+			   if ($key < 4) {continue;}
+			   array_push($param, $uri);
+			}
 		}
-		else
-		{
-			$param = '';
+		else {
+			$param[0] = '';
 		}
 
-		$controllerName = $class . "Controller";
+		$controllerName = 'Calendar\\' . $class . "Controller";
 		$Controller = new $controllerName();
-		$Controller->$function($param);
+		call_user_func_array(array($Controller, $function), $param);
 	}
 
 	/**
